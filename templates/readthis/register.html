@@ -1,0 +1,24 @@
+{% extends 'readthis/base.html' %}
+{% block title %}
+{% if registered %}
+Welcome to ReadThis
+{% else %}
+Register for ReadThis
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+		<h1>Sign up for ReadThis!</h1>
+		{% if registered %}
+			ReadThis says: <strong>thank you for registering!</strong>
+			<a href="readthis">Return to the homepage.</a><br />
+		{% else %}
+			<strong>Regitser here!</strong><br />
+			<form id='user_form method="post" action="/readthis/register enctype="multipart/form-data"'>
+				{% csrf_token %}
+				{{ user_form.as_p }}
+				{{ profile_form.as_p }}
+			<input type="submit" name="submit" value="Register" />			
+			</form>
+		{% endif %}
+{% endblock %}

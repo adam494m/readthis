@@ -1,0 +1,31 @@
+{% extends 'readthis/base.html' %}
+{% block title %}ReadThis{% endblock %}
+{% block body_block %}
+      
+      {% if user.is_authenticated %}
+      <h1>Welcome {{ user.username }}!</h1>
+      {% else %}
+      <h1>ReadThis</h1>
+      {% endif %}
+      <br />
+      
+       	<h1>Popular Categories</h1> <br />
+       	{% if categories %}
+       		<ul>
+       			{% for category in categories %}
+       			<li><a href="/readthis/category/{{ category.url }}">{{ category.name }}</a></li>
+       			{% endfor %}
+       		</ul>
+       	{% else %}
+       		<strong>There are no categories present.</strong>
+       	{% endif %}
+        <h2>Popular Pages</h2> <br />
+        {% if pages %}
+          <ul>
+            {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      
+{% endblock %}
